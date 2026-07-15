@@ -22,6 +22,13 @@
 \usepackage{lastpage}
 
 % ---------------------------------
+% Manuscript metadata
+% ---------------------------------
+\newcommand{\ManuscriptTitle}{Manuscript Title Here}
+\newcommand{\ManuscriptID}{\# Paper ID}
+\newcommand{\ResponseTitle}{Response to the Reviewers}
+
+% ---------------------------------
 % Sans helpers
 % ---------------------------------
 \newcommand{\titlefont}{\sffamily}
@@ -57,10 +64,9 @@
 % \definecolor{themecolor}{RGB}{74,106,82}
 % \definecolor{themeaccent}{RGB}{128,150,132}
 
-%  Warm Gray
+% Warm Gray
 % \definecolor{themecolor}{RGB}{96,92,88}
 % \definecolor{themeaccent}{RGB}{150,145,140}
-
 
 % Burgundy theme
 % \definecolor{themecolor}{RGB}{122,55,66}
@@ -77,8 +83,8 @@
 \definecolor{responsebg}{RGB}{255,255,255}
 
 % Revision colors only
-\definecolor{modblue}{RGB}{0,70,140}
-\definecolor{addred}{RGB}{170,20,20}
+\definecolor{modblue}{RGB}{36,84,138}
+\definecolor{addred}{RGB}{150,40,40}
 
 \newcommand{\modified}[1]{\textcolor{modblue}{#1}}
 \newcommand{\added}[1]{\textcolor{addred}{#1}}
@@ -108,7 +114,7 @@
 \fancyhf{}
 \renewcommand{\headrulewidth}{0pt}
 \renewcommand{\footrulewidth}{0.4pt}
-\fancyfoot[L]{{\labelfont\footnotesize\textcolor{textgray}{Response Letter for \# Paper ID}}}
+\fancyfoot[L]{{\labelfont\footnotesize\textcolor{textgray}{Response to Reviewers | Manuscript ID: \ManuscriptID}}}
 \fancyfoot[R]{{\labelfont\footnotesize\textcolor{textgray}{\thepage\ /\ \pageref{LastPage}}}}
 
 % ---------------------------------
@@ -121,6 +127,15 @@
 \renewcommand{\thepoint}{\thereviewer.\arabic{point}}
 
 % ---------------------------------
+% Unified text rhythm inside response/revision blocks
+% ---------------------------------
+\newcommand{\responsebodyformat}{%
+  \setstretch{1.03}%
+  \setlength{\parindent}{0pt}%
+  \setlength{\parskip}{0.42em}%
+}
+
+% ---------------------------------
 % Reviewer / Editor sections
 % ---------------------------------
 \newcommand{\reviewersection}[1]{%
@@ -128,31 +143,17 @@
   \setcounter{point}{0}%
   \bigskip
   {\titlefont\Large\bfseries Response to Reviewer \thereviewer\par}%
-  \vspace{0.25em}%
+  \vspace{0.22em}%
   \noindent\textcolor{themecolor}{\rule{\textwidth}{0.75pt}}%
-  \par\smallskip
-  \noindent
-  \begin{tcolorbox}[
-    enhanced,
-    boxrule=0.45pt,
-    colback=white,
-    colframe=rulegray,
-    sharp corners,
-    left=0.7em,
-    right=0.7em,
-    top=0.38em,
-    bottom=0.38em,
-    before skip=0.15em,
-    after skip=1.0em
-  ]
-  {\labelfont\footnotesize\textcolor{textgray}{Overall Recommendation: }\textbf{#1}}
-  \end{tcolorbox}
+  \par\vspace{0.35em}%
+  {\labelfont\footnotesize\textcolor{textgray}{Overall Recommendation: }\textbf{#1}\par}%
+  \vspace{0.75em}%
 }
 
 \newcommand{\editorsection}{%
   \bigskip
   {\titlefont\Large\bfseries Response to the Associate Editor\par}%
-  \vspace{0.25em}%
+  \vspace{0.22em}%
   \noindent\textcolor{themecolor}{\rule{\textwidth}{0.75pt}}%
   \par\medskip
 }
@@ -167,12 +168,12 @@
   colframe=white,
   colback=commentbg,
   sharp corners,
-  left=0.78em,
-  right=0.78em,
+  left=0.82em,
+  right=0.82em,
   top=1.18em,
-  bottom=0.42em,
-  before skip=1.0em,
-  after skip=0.52em,
+  bottom=0.44em,
+  before skip=0.95em,
+  after skip=0.48em,
   overlay unbroken={
     \fill[themecolor] (frame.north west) rectangle ([yshift=-0.78em]frame.north east);
     \node[
@@ -226,7 +227,7 @@
 \newenvironment{reply}
 {
   \par\smallskip
-  \noindent{\labelfont\bfseries\small\textcolor{themecolor}{Response \thepoint.}}
+  \noindent{\labelfont\bfseries\small\textcolor{textgray}{Response to Comment \thepoint.}}
   \ifresponserule
     \begin{tcolorbox}[
       enhanced,
@@ -235,12 +236,12 @@
       colframe=white,
       boxrule=0pt,
       sharp corners,
-      left=1.0em,
+      left=0.15em,
       right=0pt,
-      top=0.18em,
-      bottom=0.16em,
-      before skip=0.08em,
-      after skip=1.15em,
+      top=0.20em,
+      bottom=0.18em,
+      before skip=0.12em,
+      after skip=1.08em,
       borderline west={1.0pt}{0pt}{themeaccent}
     ]
   \else
@@ -253,12 +254,13 @@
       sharp corners,
       left=0.15em,
       right=0pt,
-      top=0.18em,
-      bottom=0.16em,
-      before skip=0.08em,
-      after skip=1.15em
+      top=0.20em,
+      bottom=0.18em,
+      before skip=0.12em,
+      after skip=1.08em
     ]
   \fi
+  \responsebodyformat
 }
 {
   \end{tcolorbox}
@@ -266,7 +268,7 @@
 
 \newcommand{\shortreply}[2][]{%
   \par\smallskip
-  \noindent{\labelfont\bfseries\small\textcolor{themecolor}{Response \thepoint.}}
+  \noindent{\labelfont\bfseries\small\textcolor{textgray}{Response to Comment \thepoint.}}
   \ifresponserule
     \begin{tcolorbox}[
       enhanced,
@@ -275,12 +277,12 @@
       colframe=white,
       boxrule=0pt,
       sharp corners,
-      left=1.0em,
+      left=0.15em,
       right=0pt,
-      top=0.18em,
-      bottom=0.16em,
-      before skip=0.08em,
-      after skip=1.15em,
+      top=0.20em,
+      bottom=0.18em,
+      before skip=0.12em,
+      after skip=1.08em,
       borderline west={1.0pt}{0pt}{themeaccent}
     ]
   \else
@@ -293,12 +295,13 @@
       sharp corners,
       left=0.15em,
       right=0pt,
-      top=0.18em,
-      bottom=0.16em,
-      before skip=0.08em,
-      after skip=1.15em
+      top=0.20em,
+      bottom=0.18em,
+      before skip=0.12em,
+      after skip=1.08em
     ]
   \fi
+  \responsebodyformat
   #2
   \ifstrempty{#1}{}{%
     \par\smallskip
@@ -319,10 +322,17 @@
   sharp corners,
   left=0.9em,
   right=0.9em,
-  top=0.52em,
-  bottom=0.52em,
-  before skip=0.55em,
-  after skip=0.15em
+  top=0.95em,
+  bottom=0.42em,
+  before skip=0.45em,
+  after skip=0.10em,
+  pad at break*=1mm,
+  lines before break=2,
+  % before upper={%
+  %   {\labelfont\footnotesize\textcolor{textgray}{Revised text}\par}%
+  %   \vspace{0.18em}%
+  %   \responsebodyformat
+  % }
 }
 
 % ---------------------------------
@@ -333,8 +343,6 @@
 
 \newcommand{\LineRef}[2]{{\labelfont\footnotesize\textcolor{textgray}{(Page~#1, Lines~#2)}}}
 \newcommand{\SecRef}[1]{{\labelfont\footnotesize\textcolor{textgray}{(Section~#1)}}}
-
-
 
 \makeatletter
 \newcommand*{\addFileDependency}[1]{%
@@ -358,17 +366,19 @@
   {\thesubsubsection.}{0.5em}{}
 
 % ---------------------------------
-% Spacing
+% Global spacing
 % ---------------------------------
 \setlength{\parindent}{1.5em}
 \setlength{\parskip}{0.2em}
 
 \begin{document}
 
+
+
 \begin{center}
-  {\titlefont\LARGE\bfseries Response to the Reviewers}\\[0.7em]
-  {\large Manuscript Title Here}\\[0.25em]
-  {\normalsize Manuscript ID: \# Paper ID}
+  {\titlefont\LARGE\bfseries \ResponseTitle}\\[0.7em]
+  {\large \ManuscriptTitle}\\[0.25em]
+  {\normalsize Manuscript ID: \ManuscriptID}
 \end{center}
 
 \vspace{0.95em}
@@ -392,12 +402,13 @@ We revised the Introduction and Method sections to clarify the main
 contribution. We also expanded the experimental description for clarity; see
 \LineRef{2}{45--68} and \LineRef{6}{210--245}.
 
+\end{reply}
+
 \begin{revisionblock}
 \modified{We refined the description of the proposed framework.}
 
 \added{We added a short paragraph explaining the practical motivation.}
 \end{revisionblock}
-\end{reply}
 
 % =================================
 % Reviewer 1
@@ -424,12 +435,13 @@ We clarified the novelty in the Introduction and revised the contribution
 statement to better distinguish our work from prior studies; see
 \LineRef{3}{72--95}.
 
+\end{reply}
+
 \begin{revisionblock}
 \modified{We reorganized the contribution statement for clarity.}
 
 \added{We added an explicit comparison with closely related work.}
 \end{revisionblock}
-\end{reply}
 
 % =================================
 % Reviewer 2
