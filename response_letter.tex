@@ -172,29 +172,30 @@
   sharp corners,
   left=0.82em,
   right=0.82em,
-  top=1.18em,
+  top=1.32em,
   bottom=0.44em,
   before skip=0.95em,
   after skip=0.48em,
   overlay unbroken={
-    \fill[themecolor] (frame.north west) rectangle ([yshift=-0.78em]frame.north east);
+    \fill[themecolor] (frame.north west) rectangle ([yshift=-0.92em]frame.north east);
     \node[
       anchor=west,
       text=white,
       font=\labelfont\bfseries\footnotesize
-    ] at ([xshift=0.82em,yshift=-0.39em]frame.north west) {#1};
+    ] at ([xshift=0.82em,yshift=-0.46em]frame.north west) {#1};
   },
   overlay first={
-    \fill[themecolor] (frame.north west) rectangle ([yshift=-0.78em]frame.north east);
+    \fill[themecolor] (frame.north west) rectangle ([yshift=-0.92em]frame.north east);
     \node[
       anchor=west,
       text=white,
       font=\labelfont\bfseries\footnotesize
-    ] at ([xshift=0.82em,yshift=-0.39em]frame.north west) {#1};
+    ] at ([xshift=0.82em,yshift=-0.46em]frame.north west) {#1};
   },
   borderline south={0.3pt}{0pt}{rulegray},
   pad at break*=1mm
 }
+
 
 \newenvironment{point1}
 {
