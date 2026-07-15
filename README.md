@@ -2,6 +2,8 @@
 
 A compact and visually polished LaTeX template for journal or conference response letters.
 
+You may preview the PDF file [HERE](https://github.com/fengxueguiren/Journal-Response-Letter-LaTeX/blob/main/journal_response_letter.pdf).
+
 This template is designed for reviewer rebuttals and revision response documents. It provides:
 
 - structured sections for the Associate Editor and each reviewer
