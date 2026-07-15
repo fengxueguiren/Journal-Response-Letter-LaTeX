@@ -17,6 +17,7 @@
 \usepackage{titlesec}
 \usepackage{setspace}
 \usepackage[most]{tcolorbox}
+\usepackage{mdframed}
 \usepackage{etoolbox}
 \usepackage{fancyhdr}
 \usepackage{lastpage}
@@ -86,8 +87,8 @@
 \definecolor{modblue}{RGB}{36,84,138}
 \definecolor{addred}{RGB}{150,40,40}
 
-\newcommand{\modified}[1]{\textcolor{modblue}{#1}}
-\newcommand{\added}[1]{\textcolor{addred}{#1}}
+\newcommand{\modified}[1]{{\color{modblue}#1}}
+\newcommand{\added}[1]{{\color{addred}#1}}
 
 % ---------------------------------
 % Response left rule switch
@@ -142,13 +143,14 @@
   \stepcounter{reviewer}%
   \setcounter{point}{0}%
   \bigskip
-  {\titlefont\Large\bfseries Response to Reviewer \thereviewer\par}%
+  \noindent
+  {\titlefont\Large\bfseries Response to Reviewer \thereviewer\hfill
+  {\labelfont\footnotesize\textcolor{textgray}{#1}}\par}%
   \vspace{0.22em}%
   \noindent\textcolor{themecolor}{\rule{\textwidth}{0.75pt}}%
-  \par\vspace{0.35em}%
-  {\labelfont\footnotesize\textcolor{textgray}{Overall Recommendation: }\textbf{#1}\par}%
-  \vspace{0.75em}%
+  \par\vspace{0.75em}%
 }
+
 
 \newcommand{\editorsection}{%
   \bigskip
@@ -313,26 +315,35 @@
 % ---------------------------------
 % Revision excerpt
 % ---------------------------------
-\newtcolorbox{revisionblock}{
-  enhanced,
-  breakable,
-  colback=extractbg,
-  colframe=extractborder,
-  boxrule=0.45pt,
-  sharp corners,
-  left=0.9em,
-  right=0.9em,
-  top=0.95em,
-  bottom=0.42em,
-  before skip=0.45em,
-  after skip=0.10em,
-  pad at break*=1mm,
-  lines before break=2,
-  % before upper={%
-  %   {\labelfont\footnotesize\textcolor{textgray}{Revised text}\par}%
-  %   \vspace{0.18em}%
-  %   \responsebodyformat
-  % }
+\newmdenv[
+  skipabove=0pt,
+  skipbelow=0pt,
+  linewidth=0.8pt,
+  linecolor=extractborder,
+  backgroundcolor=extractbg,
+  topline=false,
+  rightline=false,
+  bottomline=false,
+  leftline=true,
+  leftmargin=0pt,
+  rightmargin=0pt,
+  innerleftmargin=0.9em,
+  innerrightmargin=0.9em,
+  innertopmargin=0.55em,
+  innerbottommargin=0.45em
+]{revisionblockbody}
+
+\newenvironment{revisionblock}
+{
+  \par\vspace{0.45em}
+  % {\labelfont\footnotesize\textcolor{textgray}{Revised text}\par}%
+  \vspace{0.18em}%
+  \begin{revisionblockbody}
+  \responsebodyformat
+}
+{
+  \end{revisionblockbody}
+  \vspace{0.10em}
 }
 
 % ---------------------------------
@@ -373,8 +384,6 @@
 
 \begin{document}
 
-
-
 \begin{center}
   {\titlefont\LARGE\bfseries \ResponseTitle}\\[0.7em]
   {\large \ManuscriptTitle}\\[0.25em]
@@ -401,11 +410,12 @@ Please clarify the main contribution and improve the experimental description.
 We revised the Introduction and Method sections to clarify the main
 contribution. We also expanded the experimental description for clarity; see
 \LineRef{2}{45--68} and \LineRef{6}{210--245}.
-
 \end{reply}
 
 \begin{revisionblock}
-\modified{We refined the description of the proposed framework.}
+\textbf{Revised text in Introduction:}
+
+\modified{We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework. We refined the description of the proposed framework.}
 
 \added{We added a short paragraph explaining the practical motivation.}
 \end{revisionblock}
@@ -434,7 +444,6 @@ The novelty of the method is not sufficiently clear.
 We clarified the novelty in the Introduction and revised the contribution
 statement to better distinguish our work from prior studies; see
 \LineRef{3}{72--95}.
-
 \end{reply}
 
 \begin{revisionblock}
@@ -465,9 +474,8 @@ The manuscript can be polished for readability.
 
 \begin{reply}
 We carefully revised the language throughout the manuscript to improve clarity
-and readability. 
+and readability.
 \end{reply}
-
 
 % \bibliographystyle{IEEEtran}
 % \bibliography{refs}
